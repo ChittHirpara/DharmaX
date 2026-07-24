@@ -1,0 +1,222 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", ui-serif, Georgia, serif;
+  
+  --color-dharma-ink: #09090b;
+  --color-dharma-ink-2: #18181b;
+  --color-dharma-ink-3: #27272a;
+  --color-dharma-ivory: #fafafa;
+  --color-dharma-ivory-dim: #a1a1aa;
+
+  /* LIGHT BLUISH ACCENT THEME */
+  --color-dharma-saffron: #06b6d4;      /* Luminous Cyan */
+  --color-dharma-saffron-dim: #0284c7;  /* Deep Ocean Blue */
+  --color-dharma-flame: #38bdf8;        /* Electric Light Sky Blue */
+  --color-dharma-gold: #60a5fa;         /* Soft Ice Blue */
+  --color-dharma-maroon: #0284c7;
+
+  --color-dharma-line-dark: rgba(255, 255, 255, 0.08);
+  --color-dharma-parchment: #e0f2fe;
+  --color-dharma-parchment-2: #f0f9ff;
+  --color-dharma-earth: #0c4a6e;
+  --color-dharma-earth-dim: #0369a1;
+  --color-dharma-line-light: rgba(255, 255, 255, 0.16);
+
+  --color-dharma-card-green: #0e7490;
+  --color-dharma-card-orange: #0284c7;
+  --color-dharma-card-brown: #1e293b;
+  --color-dharma-card-cream: #e2e8f0;
+}
+
+body {
+  background-color: var(--color-dharma-ink);
+  color: var(--color-dharma-ivory);
+  overflow-x: hidden;
+}
+
+/* Lenis recommended styles */
+html.lenis, html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+/* ============================================
+   LIGHT BLUISH SHIMMER & ANIMATION UTILITIES
+   ============================================ */
+
+/* Infinite horizontal marquee */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 25s linear infinite;
+}
+
+/* Shimmer gradient text animation - Light Blue / Cyan Theme */
+@keyframes shimmer-text {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.gradient-text {
+  background: linear-gradient(90deg, #38bdf8, #60a5fa, #06b6d4, #60a5fa, #38bdf8);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer-text 4s ease infinite;
+}
+
+/* Floating particle drift */
+@keyframes float-particle {
+  0%, 100% { transform: translateY(0px) translateX(0px) rotate(0deg); opacity: 0.4; }
+  25% { transform: translateY(-20px) translateX(10px) rotate(90deg); opacity: 0.8; }
+  50% { transform: translateY(-35px) translateX(-5px) rotate(180deg); opacity: 0.5; }
+  75% { transform: translateY(-15px) translateX(-15px) rotate(270deg); opacity: 0.7; }
+}
+
+/* Breathing/pulsing glow ring */
+@keyframes breathe {
+  0%, 100% { transform: scale(1); opacity: 0.15; }
+  50% { transform: scale(1.08); opacity: 0.35; }
+}
+.animate-breathe {
+  animation: breathe 5s ease-in-out infinite;
+}
+
+/* Pulsing ring for CTA button */
+@keyframes pulse-ring {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.15); opacity: 0; }
+  100% { transform: scale(0.95); opacity: 0; }
+}
+.animate-pulse-ring {
+  animation: pulse-ring 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Card hover glow effect */
+.glow-card-hover {
+  position: relative;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.glow-card-hover::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.4), transparent 60%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+.glow-card-hover:hover::before {
+  opacity: 1;
+}
+
+/* Custom scrollbar - Light Bluish Accent */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #09090b;
+}
+::-webkit-scrollbar-thumb {
+  background: #27272a;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #38bdf8;
+}
+
+/* Noise overlay */
+.bg-noise {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+}
+
+/* Custom Selection */
+::selection {
+  background-color: #38bdf8;
+  color: #09090b;
+}
+
+/* Typography Helpers */
+.text-balance {
+  text-wrap: balance;
+}
+
+/* Glassmorphism utilities */
+.glass-panel {
+  background: rgba(24, 24, 27, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-pill {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Custom Shimmer Button */
+.shimmer-btn {
+  position: relative;
+  overflow: hidden;
+}
+.shimmer-btn::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    60deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.25) 50%,
+    transparent 70%
+  );
+  transform: rotate(30deg);
+  animation: shimmer-sweep 6s infinite;
+}
+@keyframes shimmer-sweep {
+  0% { transform: translateX(-100%) rotate(30deg); }
+  20%, 100% { transform: translateX(100%) rotate(30deg); }
+}
+
+/* Custom Radial Gradients */
+.radial-glow-flame {
+  background: radial-gradient(circle at 50% 50%, rgba(56, 189, 248, 0.15), transparent 70%);
+}
+
+.radial-glow-gold {
+  background: radial-gradient(circle at 50% 50%, rgba(96, 165, 250, 0.12), transparent 70%);
+}
+
+/* Gold Gradient Text */
+.gold-gradient-text {
+  background: linear-gradient(135deg, #38bdf8, #60a5fa, #06b6d4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}

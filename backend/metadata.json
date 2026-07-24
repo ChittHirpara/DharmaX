@@ -1,0 +1,8 @@
+{
+  "name": "Noerax",
+  "description": "Ancient Wisdom. Modern Clarity. An AI platform that blends ancient Indian wisdom with modern intelligence.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
